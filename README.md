@@ -13,10 +13,7 @@ Be sure to check out the original repo, [`mlb-led-scoreboard`](https://github.co
 If you'd like to see support for another set of board dimensions, file an issue!
 
 ## Table of Contents
-* [Features](#features)
-  * [Live Games](#live-games)
-  * [Pregame](#pregame)
-  * [Division Standings](#division-standings)
+* [Screenshots](#screenshots)
 * [Installation](#installation)
 * [Usage](#usage)
   * [Configuration](#configuration)
@@ -26,11 +23,9 @@ If you'd like to see support for another set of board dimensions, file an issue!
   * [Custom Colors](#custom-colors)
 * [Sources](#sources)
   * [Accuracy Disclaimer](#accuracy-disclaimer)
-* [Wiki](#wiki)
 * [Help and Contributing](#help-and-contributing)
   * [Latest Features](#latest-features)
 * [Licensing](#licensing)
-* [Other cool projects](#other-cool-projects)
 
 ## Screenshots
 

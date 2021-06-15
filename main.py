@@ -10,8 +10,8 @@ import renderers.standings
 import mlbgame
 import debug
 
-SCRIPT_NAME = "MLB LED Scoreboard"
-SCRIPT_VERSION = "3.5.1"
+SCRIPT_NAME = "MLB LED Scoreboard Emulated"
+SCRIPT_VERSION = "1.0.0"
 
 # Get supplied command line arguments
 args = args()
