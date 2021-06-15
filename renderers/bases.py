@@ -1,4 +1,4 @@
-from rgbmatrix import graphics
+from RGBMatrixEmulator import graphics
 from data.layout import Layout
 import data.layout
 

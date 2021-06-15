@@ -1,4 +1,4 @@
-from rgbmatrix import graphics
+from RGBMatrixEmulator import graphics
 from utils import get_font, center_text_position
 from renderers.teams import TeamsRenderer
 from renderers.scrollingtext import ScrollingText

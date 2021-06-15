@@ -1,4 +1,4 @@
-from rgbmatrix import RGBMatrixOptions, graphics
+from RGBMatrixEmulator import RGBMatrixOptions, graphics
 import collections
 import argparse
 import os

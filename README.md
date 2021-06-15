@@ -1,9 +1,7 @@
-# mlb-led-scoreboard
+# mlb-led-scoreboard-emulated
 An LED scoreboard for Major League Baseball. Displays a live scoreboard for your team's game on that day.
 
-Requires a Raspberry Pi and an LED board hooked up via the GPIO pins.
-
-[![Join Slack](https://img.shields.io/badge/slack-join-blue.svg)](https://mlb-led-scoreboard.herokuapp.com/)
+Be sure to check out the original repo, [`mlb-led-scoreboard`](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard), if you'd like to run this on a Rasperry Pi LED panel!
 
 **Currently supported boards:**
  * 32x32
@@ -13,9 +11,6 @@ Requires a Raspberry Pi and an LED board hooked up via the GPIO pins.
  * 128x64
 
 If you'd like to see support for another set of board dimensions, file an issue!
-
-**Pi's with known issues**
- * Raspberry Pi Zero has had numerous reports of slowness and unreliabilty during installation and running the software.
 
 ## Table of Contents
 * [Features](#features)
@@ -39,34 +34,11 @@ If you'd like to see support for another set of board dimensions, file an issue!
 * [Licensing](#licensing)
 * [Other cool projects](#other-cool-projects)
 
-## Features
+## Screenshots
 
-### Live Games
-It can display live games in action, and optionally rotate every 15 seconds through each game of the day.
-
-The board refreshes the list of games every 15 minutes.
-
-![Cubs-Indians game](img/cubs-indians-demo.jpg) ![Pirates-Cubs game](img/pirates-cubs-demo.jpg) ![Giants-Brewers-wide game](img/wide-ingame-demo.jpg) ![Cubs-Braves Final](img/wide-final-demo.jpg) ![Tigers-Royals game](img/128x32-live.png) ![Astros-Athletics game](img/128x64.png) ![64x64 example](img/64x64-live.jpg)
-
-Sometimes you don't get baseball though :(
-
-![I hate offdays](img/offday.jpg)
-
-### Pregame
-If a game hasn't started yet, a pregame screen will be displayed with the probable starting pitchers.
-
-![Pregame](img/pregame.jpg)
-
-### Division Standings
-It can display standings for the provided division. Since the 32x32 board is too small to display wins and losses together, the wins and losses are alternated on the board every 5 seconds.
-
-![standings-wins](img/standings-wins.jpg) ![standings-losses](img/standings-losses.jpg) ![standings-wide](img/wide-standings-demo.jpg)
+![screenshot](img/screenshot.png)
 
 ## Installation
-### Hardware Assembly
-[See our wiki page.](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard/wiki) This README is primarily focused on the MLB software, but for those coming here from Reddit or elsewhere never having built things with a Raspberry Pi, this should help get you going.
-
-### Software Installation
 #### Requirements
 You need Git for cloning this repo and PIP for installing the scoreboard software.
 ```
@@ -75,15 +47,13 @@ sudo apt-get install git python-pip
 ```
 
 #### Installing the scoreboard software
-This installation process will take about 10-15 minutes. Raspberry Pis aren't the fastest of computers, so be patient!
-
 ```
-git clone --recursive https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard
-cd mlb-led-scoreboard/
-sudo ./install.sh
-```
+# Windows
+./install.sh
 
-This will install the rgbmatrix binaries, which we get from [another open source library](https://github.com/hzeller/rpi-rgb-led-matrix/tree/master/bindings/python#building). It controls the actual rendering of the scoreboard onto the LEDs. If you're curious, you can read through their documentation on how all of the lower level stuff works.
+# Mac/Linux
+sh ./install.sh
+```
 
 It will also install the following python libraries that are required for certain parts of the scoreboard to function.
 
@@ -91,30 +61,23 @@ It will also install the following python libraries that are required for certai
 * [feedparser](https://pypi.org/project/feedparser/): Used to fetch and parse RSS feeds. The scoreboard uses this to show news headlines.
 * [pyowm](https://github.com/csparpa/pyowm): OpenWeatherMap API interactions. We use this to get the local weather for display on the offday screen. For more information on how to finish setting up the weather, visit the [weather section](#weather) of this README.
 * [mlbgame](https://github.com/panzarino/mlbgame): The main library that fetches and parses all of the actual MLB data being displayed.
-
-If you continue to run into issues, join our Slack channel located at the top of the README.
+* [RGBMatrixEmulator](https://github.com/ty-porter/RGBMatrixEmulator), a drop-in replacement for [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) which is normally used to drive LED displays on Raspberry Pi.
 
 #### Updating
-* **Re-run the install file**. Run `sudo ./install.sh` again. Any additional dependencies that were added with the update will be installed this way. If you are moving to a new major release version, answer "Y" to have it make you a new config file.
+* **Re-run the install file**. Run the above install command again. Any additional dependencies that were added with the update will be installed this way. If you are moving to a new major release version, answer "Y" to have it make you a new config file.
 * **Check your custom layout/color files if you made any**. There's a good chance some new keys were added to the layout and color files. These changes should just merge right in with the customized .json file you have but you might want to look at the new .json.example files and see if there's anything new you want to customize.
 
 That should be it! Your latest version should now be working with whatever new fangled features were just added.
 
-#### Time Zones
-Make sure your Raspberry Pi's timezone is configured to your local time zone. They'll often have London time on them by default. You can change the timezone of your raspberry pi by running `sudo raspi-config`.
-
 ## Usage
-`sudo python main.py` Running as root is 100% an absolute must, or the matrix won't render.
-
-**Adafruit HAT/Bonnet users: You must supply a command line flag:**
-
-`sudo python main.py --led-gpio-mapping="adafruit-hat"`
+`python main.py`
 
 See the Flags section below for more flags you can optionally provide.
 
 ### Configuration
+There are two config files associated with the scoreboard.
 
-A default `config.json.example` file is included for reference. Copy this file to `config.json` and modify the values as needed.
+The first (`config.json`) controls the scoreboard option. A default `config.json.example` file is included for reference. Copy this file to `config.json` and modify the values as needed.
 
 ```
 "preferred":                           Options for team and division preference
@@ -161,6 +124,13 @@ A default `config.json.example` file is included for reference. Copy this file t
 "demo_date"                    String  A date in the format YYYY-MM-DD from which to pull data to demonstrate the scoreboard. A value of `false` will disable demo mode.
 ```
 
+You may also configure the emulator options via `emulator_config.json` (an example file is included as reference).
+
+```
+"pixel_size"                   Integer The size of the LED pixel in screen pixels (default: 10)
+"pixel_style"                  String  The style of the LED pixel, can be either "square" or "circle" (default: "circle")
+```
+
 ### Flags
 
 You can configure your LED matrix with the same flags used in the [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) library. More information on these arguments can be found in the library documentation.
@@ -200,25 +170,20 @@ You can change the location used by entering your city, state, and country code 
 
 ## Sources
 This project relies on two libraries:
-[MLBGame](https://github.com/panzarino/mlbgame) is the Python library used for retrieving live game data.
-[rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) is the library used for making everything work with the LED board and is included as a submodule, so when cloning, make sure you add `--recursive`.
+[MLBGame](https://github.com/panzarino/mlbgame) is the Python library used for retrieving live game data. [RGBMatrixEmulator](https://github.com/ty-porter/RGBMatrixEmulator), a drop-in replacement for [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) which is normally used to drive LED displays on Raspberry Pi.
 
 ### Accuracy Disclaimer
 The scoreboard is dependent on MLB having their data correct and up to date. If you see any weird data such as wrong pitches or scores or whatever else, MLB is drunk.
 
-## Wiki
-The wiki for this project has some cool things you can do to your Raspberry Pi, including steps on making your Pi a dedicated scoreboard runner!
-
 ## Help and Contributing
 If you run into any issues and have steps to reproduce, open an issue. If you have a feature request, open an issue. If you want to contribute a small to medium sized change, open a pull request. If you want to contribute a new feature, open an issue first before opening a PR.
-
-If you just want to talk, join the Slack channel, see the badge at the top of the README
 
 ### Latest Features
 The scoreboard follows semantic versioning, for what makes sense for a project like this (it has no consumable API or anything like that). The `master` branch is always kept clean and never updated except for releases. If you want to contribute, make sure your pull request is pointed to `dev`.
 
 ## Licensing
+This fork is released under the original author's license:
+```
 This project as of v1.1.0 uses the GNU Public License. If you intend to sell these, the code must remain open source.
-
-## Other Cool Projects
-Inspired by this board, check out the [NHL scoreboard](https://github.com/riffnshred/nhl-led-scoreboard) 🏒
+```
+https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard#licensing

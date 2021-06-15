@@ -1,5 +1,5 @@
 from PIL import Image
-from rgbmatrix import graphics
+from RGBMatrixEmulator import graphics
 from utils import get_font, get_file, center_text_position
 from renderers.network import NetworkErrorRenderer
 import time

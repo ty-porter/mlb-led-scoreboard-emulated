@@ -1,4 +1,4 @@
-from rgbmatrix import graphics
+from RGBMatrixEmulator import graphics
 from utils import get_font
 
 class PitchesRenderer:

@@ -1,4 +1,4 @@
-from rgbmatrix import graphics
+from RGBMatrixEmulator import graphics
 from PIL import Image
 from utils import get_font, get_file, center_text_position
 from renderers.scrollingtext import ScrollingText
@@ -69,6 +69,7 @@ class OffdayRenderer:
     font = self.layout.font("offday.scrolling_text")
     color = self.colors.graphics_color("offday.scrolling_text")
     ticker_text = self.data.headlines.ticker_string()
+    ticker_text = 'Sunday, May 2nd'
     return ScrollingText(self.canvas, coords["x"], coords["y"], coords["width"], font, color, self.bgcolor, ticker_text).render(self.scrolling_text_pos)
 
   def __str_(self):

@@ -121,3 +121,6 @@ src/
 
 # Ignore logs
 logs.txt
+
+# Ignore custom emulator configurations
+emulator_config.json
