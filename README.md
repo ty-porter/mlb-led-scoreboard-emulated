@@ -18,8 +18,6 @@ If you'd like to see support for another set of board dimensions, file an issue!
   * [Pregame](#pregame)
   * [Division Standings](#division-standings)
 * [Installation](#installation)
-  * [Hardware Assembly](#hardware-assembly)
-  * [Software Installation](#software-installation)
 * [Usage](#usage)
   * [Configuration](#configuration)
   * [Flags](#flags)
