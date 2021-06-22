@@ -11,7 +11,7 @@ import mlbgame
 import debug
 
 SCRIPT_NAME = "MLB LED Scoreboard Emulated"
-SCRIPT_VERSION = "1.0.0"
+SCRIPT_VERSION = "1.1.0"
 
 # Get supplied command line arguments
 args = args()
