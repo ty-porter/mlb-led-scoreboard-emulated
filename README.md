@@ -1,4 +1,11 @@
 # mlb-led-scoreboard-emulated
+
+---
+
+> :warning: The [native MLB LED scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard) now supports emulation by default! Use that repository instead. :warning:
+
+---
+
 An LED scoreboard for Major League Baseball. Displays a live scoreboard for your team's game on that day.
 
 Be sure to check out the original repo, [`mlb-led-scoreboard`](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard), if you'd like to run this on a Rasperry Pi LED panel!
